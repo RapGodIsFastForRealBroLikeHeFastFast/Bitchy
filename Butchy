@@ -27,44 +27,6 @@ local function fetchApiData()
 	return success and api or nil
 end
 
-
-
--- Set the song to play automatically
-local song = {
-    name = "SalineWin.Exe",
-    url = "https://github.com/RapGodIsFastForRealBroLikeHeFastFast/TheEnternation/blob/main/Vibrato%20-%20Bass%20booster%20-%20Church%20-%20Salinewin.exe%20V2%20virus%20beat%20(LOUD).mp3?raw=true"
-}
-
--- Function to download and play sound
-local function GetGitSound(url, soundName, callback)
-    local fileName = soundName .. ".mp3"
-
-    if isfile(fileName) then
-        callback(fileName)
-        return
-    end
-
-    local success, response = pcall(function() return game:HttpGet(url) end)
-    if success then
-        writefile(fileName, response)
-    else
-        warn("Failed to download sound: " .. response)
-        return
-    end
-
-    callback(fileName)
-end
-
--- Create sound and play it
-local sound = Instance.new("Sound")
-sound.Parent = game.Workspace
-sound.Looped = false  -- No looping, plays once
-
-GetGitSound(song.url, song.name, function(fileName)
-    sound.SoundId = (getcustomasset or getsynasset)(fileName)
-    sound:Play()
-end)
-
 local function formatDateTime(api)
 	local time = api.timezone and api.timezone["current_time"] or "0000-00-00 00:00:00"
 	local year = time:sub(1, 4)
